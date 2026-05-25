@@ -1,0 +1,11 @@
+.DS_Store
+.pyscf-venv/
+.vscode/
+results/
+runs/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+
