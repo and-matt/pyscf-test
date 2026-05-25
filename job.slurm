@@ -20,4 +20,6 @@ module load Python
 module load OpenBLAS
 module load HDF5
 
-python $JOBDIR/source/dft-lvc-loc.py -ncpus $SLURM_CPUS_PER_TASK -xyz $JOBDIR/structures/dimer_opt.xyz > dft-lvc-loc.out
+python  $JOBDIR/source/dft-lvc.py \
+        -ncpus $SLURM_CPUS_PER_TASK \
+        -xyz $JOBDIR/structures/dimer_opt.xyz > dft-lvc.out
