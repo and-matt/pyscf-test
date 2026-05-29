@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=lvc
+#SBATCH --job-name=dft-lvc
 #SBATCH --time=15:00:00
 #SBATCH --mem=128G
 #SBATCH --ntasks=1
@@ -11,7 +11,6 @@ export OPENBLAS_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 set -euo pipefail
 
-JOBDIR=$(pwd)
 WORKDIR=${SLURM_JOB_ID}
 mkdir -p runs/$WORKDIR
 cd runs/$WORKDIR
@@ -19,6 +18,8 @@ cd runs/$WORKDIR
 module load Python
 module load OpenBLAS
 module load HDF5
+
+JOBDIR=$(pwd)
 
 python  $JOBDIR/source/dft-lvc.py \
         -ncpus $SLURM_CPUS_PER_TASK \
