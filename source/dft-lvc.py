@@ -1,5 +1,6 @@
 '''
 Calculate linear electron-phonon couplings using DFT in PySCF.
+
 Results are written in file out.h5, containing e-ph coupling matrix (cm^-1), 
 mode frequencies (cm^-1) and vectors (mass-weighted Hessian eigenvectors).
 Equilibrium DFT calculation results are stored in calc.chk.
@@ -70,9 +71,9 @@ print(f'DFT calculation took {elapsed:.6f} s.')
 mf.xc = EPH_FUNCTIONAL
 start = time.time()
 eph_obj = eph.EPH(mf, cutoff_frequency=CUTOFF_FREQUENCY, keep_imag_frequency=True)
-# electron-phonon matrix units cm^-1, shape (nmodes, nao, nao)
+# electron-phonon matrix units cm^-1, shape (nvib, nao, nao)
 ephmat, omega = eph_obj.kernel()
-# mode vectors units mass-weighted coordinates, shape (3*natm, nmodes)
+# mode vectors units mass-weighted coordinates, shape (3*natm, nvib)
 _, modevec = eph_obj.get_mode()
 end = time.time()
 elapsed = end - start

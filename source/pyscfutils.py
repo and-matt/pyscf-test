@@ -2,16 +2,10 @@
 Functions used for pre- and post-processing of PySCF calculations.
 """
 
-
-import time
-import h5py
-import argparse
-import os
 import numpy as np
 import scipy as sp
-import py3Dmol
-from pyscf import dft, lo, lib
-from pyscf.tools import cubegen
+from pyscf import dft, lib, lo, ao2mo
+from pyscf.tools import cubegen 
 
 
 def xyz_string(symbls, coords, filename=None):
@@ -39,8 +33,9 @@ def mf_from_chk(chkfile):
 def Boys_frontier_orbitals(mf, norb):
     """
     !!! Important: norb must be even !!!
-    Identify the frontier molecular orbitals (HOMO - norb/2 + 1, ..., LUMO + norb/2).
-    Return Boys localized MO coefficients and indices of the frontier orbitals.
+    Identify the frontier molecular orbitals
+    (HOMO - norb/2 + 1, ..., LUMO + norb/2).
+    Return Boys localized MO coefficients and frontier indices.
     """
     # Identify frontier orbital indices
     mo_occ = mf.mo_occ
@@ -66,7 +61,7 @@ def atomic_populations(mf, mo_coeff):
         pop, _ = mf.mulliken_pop(mf.mol, dm_mo, verbose=0)
         for a in range(natm):
             # find indices of all atomic orbitals on the same atom
-            idx = [k for k, l in enumerate(labels) if int(l.split()[0]) == a]
+            idx = [k for k, l in enumerate(labels) if int(l.split()[0])==a]
             # calculate total population on an atom
             atomic_pop[a, i] = np.sum(pop[idx])
     return atomic_pop
@@ -131,3 +126,51 @@ def eighsort(mat):
     i = np.argsort(val)
     return val[i], vec[:,i]
 
+
+def two_electron_integrals(mol, mo_coeff):
+    """Return two-electron integrals indexed in chemist notation (ij|kl)."""
+    eri4mo = ao2mo.kernel(mol, mo_coeff)
+    eri4mo = ao2mo.restore(1, eri4mo, 4)
+    return eri4mo
+
+
+def save_orbital(mol, cubefile, mo, grid=(100,50,50)):
+    """Save cube file for a molecular orbital."""
+    nx, ny, nz = grid
+    cubegen.orbital(mol, cubefile, mo, nx=nx, ny=ny, nz=nz)
+    return
+
+
+def cartesian_modevec(mol, modevec):
+    """Convert Hessian eigenvector to cartesian displacement array."""
+    natm = mol.natm
+    mass = mol.atom_mass_list()
+    modevec_cart = modevec.reshape(natm, 3)
+    for a in range(natm):
+        modevec_cart[a] = modevec_cart[a] / np.sqrt(mass[a])
+    modevec_cart = modevec_cart / np.linalg.norm(modevec_cart)
+    return modevec_cart
+
+
+def multiconfig_vibronic_coupling(g):
+    """
+    Convert vibronic coupling from MO basis to the singlet space 
+    formed by symmetric / antisymmetric singlet exciton (SE+, SE-), 
+    charge-transfer (CT+, CT-), and correlated triplet-triplet (TT) states.
+    Molecular orbital index ordering is assumed to be hA, lA, hB, lB
+    (localized HOMO/LUMO on monomer A/B).
+    Further reading:
+    - Smith & Michl (2010) https://doi.org/10.1021/cr1002613
+    - Alguire et al. (2015) https://doi.org/10.1021/jp510777c
+    - Schroeder et al. (2019) https://doi.org/10.1038/s41467-019-09039-7
+    """
+    nvib = g.shape[0]
+    W = np.zeros((nvib, 5, 5))
+    W[:,0,1] = 0.5 * ( g[:,2,2] - g[:,0,0] - g[:,3,3] + g[:,1,1] )
+    W[:,2,3] = 0.5 * ( g[:,2,2] - g[:,0,0] + g[:,3,3] - g[:,1,1] )
+    W[:,0,2] = g[:,1,3] - g[:,0,3]
+    W[:,1,3] = g[:,1,3] + g[:,0,3]
+    W[:,4,2] = np.sqrt(3) / 2 * ( g[:,1,2] + g[:,0,3] )
+    W[:,4,3] = np.sqrt(3) / 2 * ( g[:,1,2] - g[:,0,3] )
+    W = W + W.transpose(0,2,1)
+    return W
