@@ -1,5 +1,5 @@
 """
-Functions used for pre- and post-processing of PySCF calculations.
+Functions used for pre- and post-processing of PySCF DFT calculations.
 """
 
 import numpy as np
@@ -140,37 +140,3 @@ def save_orbital(mol, cubefile, mo, grid=(100,50,50)):
     cubegen.orbital(mol, cubefile, mo, nx=nx, ny=ny, nz=nz)
     return
 
-
-def cartesian_modevec(mol, modevec):
-    """Convert Hessian eigenvector to cartesian displacement array."""
-    natm = mol.natm
-    mass = mol.atom_mass_list()
-    modevec_cart = modevec.reshape(natm, 3)
-    for a in range(natm):
-        modevec_cart[a] = modevec_cart[a] / np.sqrt(mass[a])
-    modevec_cart = modevec_cart / np.linalg.norm(modevec_cart)
-    return modevec_cart
-
-
-def multiconfig_vibronic_coupling(g):
-    """
-    Convert vibronic coupling from MO basis to the singlet space 
-    formed by symmetric / antisymmetric singlet exciton (SE+, SE-), 
-    charge-transfer (CT+, CT-), and correlated triplet-triplet (TT) states.
-    Molecular orbital index ordering is assumed to be hA, lA, hB, lB
-    (localized HOMO/LUMO on monomer A/B).
-    Further reading:
-    - Smith & Michl (2010) https://doi.org/10.1021/cr1002613
-    - Alguire et al. (2015) https://doi.org/10.1021/jp510777c
-    - Schroeder et al. (2019) https://doi.org/10.1038/s41467-019-09039-7
-    """
-    nvib = g.shape[0]
-    W = np.zeros((nvib, 5, 5))
-    W[:,0,1] = 0.5 * ( g[:,2,2] - g[:,0,0] - g[:,3,3] + g[:,1,1] )
-    W[:,2,3] = 0.5 * ( g[:,2,2] - g[:,0,0] + g[:,3,3] - g[:,1,1] )
-    W[:,0,2] = g[:,1,3] - g[:,0,3]
-    W[:,1,3] = g[:,1,3] + g[:,0,3]
-    W[:,4,2] = np.sqrt(3) / 2 * ( g[:,1,2] + g[:,0,3] )
-    W[:,4,3] = np.sqrt(3) / 2 * ( g[:,1,2] - g[:,0,3] )
-    W = W + W.transpose(0,2,1)
-    return W

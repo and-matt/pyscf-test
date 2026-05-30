@@ -15,7 +15,7 @@ import h5py
 import argparse
 from pyscf import gto, eph, lib
 from pyscf.geomopt.geometric_solver import optimize
-from pyscfutils import xyz_string
+from dftutils import xyz_string
 
 BASIS_SET = 'cc-pvdz'
 FUNCTIONAL = 'camb3lyp'
@@ -83,6 +83,6 @@ print(f'EPH calculation took {elapsed:.6f} s.')
 # Save electron-phonon couplings, frequencies and mode vectors
 hdf5_file_path = 'out.h5'
 with h5py.File(hdf5_file_path, 'w') as hdf5_file:
-    hdf5_file.create_dataset('ephmat',  data=ephmat)
-    hdf5_file.create_dataset('omega',   data=omega)
+    hdf5_file.create_dataset('ephmat', data=ephmat)
+    hdf5_file.create_dataset('omega', data=omega)
     hdf5_file.create_dataset('modevec', data=modevec)

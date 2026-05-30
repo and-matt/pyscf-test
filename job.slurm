@@ -23,4 +23,5 @@ JOBDIR=$(pwd)
 
 python  $JOBDIR/source/dft-lvc.py \
         -ncpus $SLURM_CPUS_PER_TASK \
-        -xyz $JOBDIR/structures/dimer_opt.xyz > dft-lvc.out
+        -xyz $JOBDIR/structures/dimer_opt.xyz \
+        > dft-lvc.out

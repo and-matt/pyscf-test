@@ -1,11 +1,12 @@
 """
-Tools to visualize orbitals and molecular structures.
+Tools for visualizing orbitals and molecular structures.
 """
 
 import os
 import webbrowser
 import py3Dmol
-from pyscfutils import xyz_string, cartesian_modevec
+from dftutils import xyz_string
+from ephutils import cartesian_modevec
 
 
 def view_orbital(mol_obj, cube_filename, iso=0.025, alpha=0.9, html=True):
@@ -54,8 +55,9 @@ def view_vibration(mol_obj, modevec, amplitude=0.5, equilibrium=False):
     view = py3Dmol.view(width=600, height=300)
     symbols = mol_obj.elements
     coords = mol_obj.atom_coords(unit="Angstrom")
-    coords_pve = coords + amplitude * cartesian_modevec(mol_obj, modevec)
-    coords_nve = coords - amplitude * cartesian_modevec(mol_obj, modevec)
+    mass = mol_obj.atom_mass_list()
+    coords_pve = coords + amplitude * cartesian_modevec(modevec, mass)
+    coords_nve = coords - amplitude * cartesian_modevec(modevec, mass)
     # Draw distorted structures with thinner sticks for better rendering
     radius = 0.25 # angstrom, default value in py3Dmol
     # Positive displacement
@@ -77,3 +79,4 @@ def view_vibration(mol_obj, modevec, amplitude=0.5, equilibrium=False):
     view.rotate(-45, "x")
     view.zoom(1.5)
     return view
+
