@@ -166,3 +166,12 @@ def view_multiconfig_vibronic_coupling(mat, frequency=None, coupling=None):
     return fig
 
 
+def show_matrix(mat, logscale=False):
+    mat = np.abs(mat)
+    fig, ax = plt.subplots()
+    if logscale: mat = np.log10(mat)
+    p = ax.imshow(mat)
+    cb = fig.colorbar(p, ax=ax)
+    if logscale: cb.ax.set_ylabel(r"log$_{10}$")
+    return fig
+

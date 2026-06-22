@@ -113,3 +113,81 @@ def effective_spectral_density(fgrid, omega, lvc, hwhm=5, plot=True):
         plt.tight_layout()
         plt.show()
     return jgrid
+
+
+def eigh_block(mat, block_size):
+    """
+    Returns block-diagonalized matrix in blocks of size block_size (list) 
+    with block-eigenvalues in ascending value, and block-unitary.
+    """
+    if np.isscalar(block_size):
+        block_size = [block_size, len(mat) - block_size]
+    if sum(block_size) != len(mat):
+        print("Sum of block dimensions must equal matrix dimension!")
+    block_unitaries = []
+    nblocks = len(block_size)
+    for i in range(nblocks):
+        start = sum(block_size[:i])
+        end = start + block_size[i]
+        mat_sub = mat[start:end, start:end]
+        _, vec_sub = sp.linalg.eigh(mat_sub)
+        block_unitaries += [vec_sub]
+    u_block = sp.linalg.block_diag(*block_unitaries)
+    mat_block_diag = u_block.T @ mat @ u_block
+    return mat_block_diag, u_block
+
+
+def diagonalize_block(H, start, size):
+    N = H.shape[0]
+    stop = start + size
+    Hblk = H[start:stop, start:stop]
+    _, Ublk = np.linalg.eigh(Hblk)
+    Uembed = np.eye(N, dtype=complex)
+    Uembed[start:stop, start:stop] = Ublk
+    H = Uembed.conj().T @ H @ Uembed
+    return H, Uembed
+
+
+def nn_block_mapping(mat, first_block_size, tolerance=1e-8):
+    H = np.array(mat, dtype=complex, copy=True)
+    N = H.shape[0]
+    if H.shape != (N, N):
+        raise ValueError("H must be square")
+    Utot = np.eye(N, dtype=complex)
+    block_sizes = []
+    current_start = 0
+    current_size = first_block_size
+    H, U = diagonalize_block(H, current_start, current_size)
+    Utot = U
+    block_sizes.append(current_size)
+    while True:
+        # Define current block
+        current_stop = current_start + current_size
+        remainder_size = N - current_stop
+        if remainder_size == 0:
+            break
+        # SVD on block-remainder coupling (rectangular block)
+        V = H[current_start:current_stop, current_stop:]
+        if np.allclose(V, 0):
+            break
+        _, s, Wdag = np.linalg.svd(V)
+        smax = s[0]
+        if smax == 0:
+            break
+        next_size = np.count_nonzero(s > tolerance * smax)
+        next_size = min(next_size, remainder_size)
+        # Rotate remainder by right singular vectors
+        W = Wdag.conj().T
+        Uembed = np.eye(N, dtype=complex)
+        Uembed[current_stop:, current_stop:] = W
+        H = Uembed.conj().T @ H @ Uembed
+        Utot = Utot @ Uembed
+        # New block = first next_size states of rotated remainder
+        next_start = current_stop
+        H, U = diagonalize_block(H, next_start, next_size)
+        Utot = Utot @ U
+        block_sizes.append(next_size)
+        current_start = next_start
+        current_size = next_size
+    return H, Utot, block_sizes
+

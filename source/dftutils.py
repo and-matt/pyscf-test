@@ -93,6 +93,9 @@ def pair_neighboring_orbitals(mf, mo_coeff):
     return mo_coeff_sorted, ordered_indices
 
 
+# this function can be simplified using function eigh_block
+# once neighboring orbitals are paired, we can just feed
+# the pair indices as blocks for eigh_block
 def block_frontier_orbitals(mf, mo_coeff, fock=None):
     """
     Block-diagonalise the Fock matrix within 2-dimensional blocks.
@@ -125,6 +128,27 @@ def eighsort(mat):
     val, vec = np.linalg.eigh(mat)
     i = np.argsort(val)
     return val[i], vec[:,i]
+
+
+def eigh_block(mat, block_size):
+    """
+    Returns block-diagonalized matrix in blocks of size (list) 
+    with block-eigenvalues in ascending value, and block-unitary.
+    """
+    if sum(block_size) != len(mat):
+        print("Sum of block dimensions must equal matrix dimension!")
+    block_unitaries = []
+    nblocks = len(block_size)
+    for i in range(nblocks):
+        start = sum(block_size[:i])
+        end = start + block_size[i]
+        mat_sub = mat[start:end, start:end]
+        _, vec_sub = eighsort(mat_sub)
+        block_unitaries += [vec_sub]
+    u_block = sp.linalg.block_diag(*block_unitaries)
+    mat_block_diag = u_block.T @ mat @ u_block
+    return mat_block_diag, u_block
+
 
 
 def two_electron_integrals(mol, mo_coeff):
