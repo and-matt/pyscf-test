@@ -150,7 +150,6 @@ def eigh_block(mat, block_size):
     return mat_block_diag, u_block
 
 
-
 def two_electron_integrals(mol, mo_coeff):
     """Return two-electron integrals indexed in chemist notation (ij|kl)."""
     eri4mo = ao2mo.kernel(mol, mo_coeff)
@@ -164,3 +163,9 @@ def save_orbital(mol, cubefile, mo, grid=(100,50,50)):
     cubegen.orbital(mol, cubefile, mo, nx=nx, ny=ny, nz=nz)
     return
 
+
+def localize_frontier_orbitals(mf, norb, fock=None):
+    mo_coeff_boys, idx = Boys_frontier_orbitals(mf, norb)
+    mo_coeff_boys, _ = pair_neighboring_orbitals(mf, mo_coeff_boys)
+    mo_coeff_block = block_frontier_orbitals(mf, mo_coeff_boys, fock)
+    return mo_coeff_block, idx

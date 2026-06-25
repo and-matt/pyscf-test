@@ -1,0 +1,223 @@
+Importing data...
+Setting up CASCI calculation...
+Starting CASCI calculation...
+
+** Self-consistently update the solvent effects for StateAveragePCMCASCI **
+
+** Solvent self-consistent cycle 0:
+
+WARN: PCM is an experimental feature. It is still in testing.
+Features and APIs may be changed in the future.
+
+CASCI E = -1490.67571339139  E(CI) = -1.32021587094869  S^2 = 1.3333333
+CASCI state-averaged energy = -1490.67571339139
+CASCI energy for each state
+  State 0 weight 0.0833333  E = -1490.84209624754 S^2 = 0.0000000
+  State 1 weight 0.0833333  E = -1490.74765256587 S^2 = 2.0000000
+  State 2 weight 0.0833333  E = -1490.74627904666 S^2 = 2.0000000
+  State 3 weight 0.0833333  E = -1490.67749449347 S^2 = 0.0000000
+  State 4 weight 0.0833333  E = -1490.67499784201 S^2 = 0.0000000
+  State 5 weight 0.0833333  E = -1490.6517738549 S^2 = 6.0000000
+  State 6 weight 0.0833333  E = -1490.65101502023 S^2 = 2.0000000
+  State 7 weight 0.0833333  E = -1490.65066220711 S^2 = 0.0000000
+  State 8 weight 0.0833333  E = -1490.61732660041 S^2 = 2.0000000
+  State 9 weight 0.0833333  E = -1490.61714990073 S^2 = 2.0000000
+  State 10 weight 0.0833333  E = -1490.61689070207 S^2 = 0.0000000
+  State 11 weight 0.0833333  E = -1490.61522221568 S^2 = 0.0000000
+Solvent cycle 0  E(CASCI+solvent) = -1490.67571339139  dE = -1490.68
+
+** Solvent self-consistent cycle 1:
+
+WARN: PCM is an experimental feature. It is still in testing.
+Features and APIs may be changed in the future.
+
+CASCI E = -1490.97818058500  E(CI) = -1.32955220897793  S^2 = 1.3333333
+CASCI state-averaged energy = -1490.978180585
+CASCI energy for each state
+  State 0 weight 0.0833333  E = -1491.14450337691 S^2 = 0.0000000
+  State 1 weight 0.0833333  E = -1491.05009085666 S^2 = 2.0000000
+  State 2 weight 0.0833333  E = -1491.04873075924 S^2 = 2.0000000
+  State 3 weight 0.0833333  E = -1490.97990419286 S^2 = 0.0000000
+  State 4 weight 0.0833333  E = -1490.97743103206 S^2 = 0.0000000
+  State 5 weight 0.0833333  E = -1490.95429787255 S^2 = 6.0000000
+  State 6 weight 0.0833333  E = -1490.95350365959 S^2 = 2.0000000
+  State 7 weight 0.0833333  E = -1490.95313255446 S^2 = 0.0000000
+  State 8 weight 0.0833333  E = -1490.91980410132 S^2 = 2.0000000
+  State 9 weight 0.0833333  E = -1490.91964039788 S^2 = 2.0000000
+  State 10 weight 0.0833333  E = -1490.91938684885 S^2 = 0.0000000
+  State 11 weight 0.0833333  E = -1490.91774136759 S^2 = 0.0000000
+Solvent cycle 1  E(CASCI+solvent) = -1490.68341372335  dE = -0.00770033
+
+** Solvent self-consistent cycle 2:
+
+WARN: PCM is an experimental feature. It is still in testing.
+Features and APIs may be changed in the future.
+
+CASCI E = -1490.97802896772  E(CI) = -1.32955074102961  S^2 = 1.3333333
+CASCI state-averaged energy = -1490.97802896772
+CASCI energy for each state
+  State 0 weight 0.0833333  E = -1491.14435171731 S^2 = 0.0000000
+  State 1 weight 0.0833333  E = -1491.04993921924 S^2 = 2.0000000
+  State 2 weight 0.0833333  E = -1491.04857912638 S^2 = 2.0000000
+  State 3 weight 0.0833333  E = -1490.97975253455 S^2 = 0.0000000
+  State 4 weight 0.0833333  E = -1490.9772793787 S^2 = 0.0000000
+  State 5 weight 0.0833333  E = -1490.9541462977 S^2 = 6.0000000
+  State 6 weight 0.0833333  E = -1490.95335205409 S^2 = 2.0000000
+  State 7 weight 0.0833333  E = -1490.95298093336 S^2 = 0.0000000
+  State 8 weight 0.0833333  E = -1490.91965249765 S^2 = 2.0000000
+  State 9 weight 0.0833333  E = -1490.91948879858 S^2 = 2.0000000
+  State 10 weight 0.0833333  E = -1490.9192352658 S^2 = 0.0000000
+  State 11 weight 0.0833333  E = -1490.91758978923 S^2 = 0.0000000
+Solvent cycle 2  E(CASCI+solvent) = -1490.68341396599  dE = -2.42641e-07
+
+** Solvent self-consistent cycle 3:
+
+WARN: PCM is an experimental feature. It is still in testing.
+Features and APIs may be changed in the future.
+
+CASCI E = -1490.97802896347  E(CI) = -1.32955074240408  S^2 = 1.3333333
+CASCI state-averaged energy = -1490.97802896347
+CASCI energy for each state
+  State 0 weight 0.0833333  E = -1491.14435171321 S^2 = 0.0000000
+  State 1 weight 0.0833333  E = -1491.049939215 S^2 = 2.0000000
+  State 2 weight 0.0833333  E = -1491.04857912214 S^2 = 2.0000000
+  State 3 weight 0.0833333  E = -1490.9797525303 S^2 = 0.0000000
+  State 4 weight 0.0833333  E = -1490.97727937446 S^2 = 0.0000000
+  State 5 weight 0.0833333  E = -1490.95414629338 S^2 = 6.0000000
+  State 6 weight 0.0833333  E = -1490.95335204975 S^2 = 2.0000000
+  State 7 weight 0.0833333  E = -1490.95298092901 S^2 = 0.0000000
+  State 8 weight 0.0833333  E = -1490.91965249343 S^2 = 2.0000000
+  State 9 weight 0.0833333  E = -1490.91948879436 S^2 = 2.0000000
+  State 10 weight 0.0833333  E = -1490.91923526158 S^2 = 0.0000000
+  State 11 weight 0.0833333  E = -1490.91758978502 S^2 = 0.0000000
+Solvent cycle 3  E(CASCI+solvent) = -1490.68341396601  dE = -2.47837e-11
+
+******** <class 'pyscf.mcscf.addons.StateAveragePCMCASCI'> ********
+CAS (2e+2e, 4o), ncore = 127, nvir = 535
+natorb = False
+canonicalization = True
+sorting_mo_energy = False
+max_memory 4000 MB (current use 0 MB)
+******** <class 'pyscf.mcscf.addons.StateAverageFCISolver'> ********
+max. cycles = 200
+conv_tol = 1e-08
+davidson only = False
+linear dependence = 1e-12
+level shift = 0.001
+max iter space = 12
+max_memory 4000 MB
+nroots = 12
+pspace_size = 400
+spin = None
+State-average over 12 states with weights [0.08333333 0.08333333 0.08333333 0.08333333 0.08333333 0.08333333
+ 0.08333333 0.08333333 0.08333333 0.08333333 0.08333333 0.08333333]
+
+WARN: PCM is an experimental feature. It is still in testing.
+Features and APIs may be changed in the future.
+
+Density matrix diagonal elements [1.40745692 0.59254305 1.40745745 0.59254257]
+CASCI converged
+self-consistent CASCI+solvent converged
+Total energy with solvent effects
+CASCI E = -1490.68341396610  E(CI) = -1.32955074153733  S^2 = 1.3333333
+CASCI state-averaged energy = -1490.97802890036
+CASCI energy for each state
+  State 0 weight 0.0833333  E = -1491.14435165006 S^2 = 0.0000000
+  State 1 weight 0.0833333  E = -1491.04993915188 S^2 = 2.0000000
+  State 2 weight 0.0833333  E = -1491.04857905902 S^2 = 2.0000000
+  State 3 weight 0.0833333  E = -1490.97975246717 S^2 = 0.0000000
+  State 4 weight 0.0833333  E = -1490.97727931133 S^2 = 0.0000000
+  State 5 weight 0.0833333  E = -1490.9541462303 S^2 = 6.0000000
+  State 6 weight 0.0833333  E = -1490.95335198666 S^2 = 2.0000000
+  State 7 weight 0.0833333  E = -1490.95298086592 S^2 = 0.0000000
+  State 8 weight 0.0833333  E = -1490.91965243032 S^2 = 2.0000000
+  State 9 weight 0.0833333  E = -1490.91948873125 S^2 = 2.0000000
+  State 10 weight 0.0833333  E = -1490.91923519848 S^2 = 0.0000000
+  State 11 weight 0.0833333  E = -1490.91758972191 S^2 = 0.0000000
+CASCI took 3465.599968 s.
+CASCI energies:
+Root  0 : 0.00000000 meV
+Root  1 : 2569.09700379 meV
+Root  2 : 2606.10704529 meV
+Root  3 : 4478.97551426 meV
+Root  4 : 4546.27356678 meV
+Root  5 : 5175.75727191 meV
+Root  6 : 5197.36975954 meV
+Root  7 : 5207.46847744 meV
+Root  8 : 6114.38213493 meV
+Root  9 : 6118.83661697 meV
+Root 10 : 6125.73560073 meV
+Root 11 : 6170.51133480 meV
+
+==== Root 0 ====
+ -0.9816   0b101   0b101
+ +0.1341   0b110   0b110
+ +0.1341   0b1001   0b1001
+
+==== Root 1 ====
+ +0.4950   0b101   0b110
+ -0.4926   0b101   0b1001
+ -0.4950   0b110   0b101
+ +0.4926   0b1001   0b101
+
+==== Root 2 ====
+ -0.4941   0b101   0b110
+ -0.4964   0b101   0b1001
+ +0.4941   0b110   0b101
+ +0.4964   0b1001   0b101
+
+==== Root 3 ====
+ -0.4898   0b101   0b110
+ +0.4882   0b101   0b1001
+ -0.4898   0b110   0b101
+ +0.4882   0b1001   0b101
+
+==== Root 4 ====
+ -0.4934   0b101   0b110
+ -0.4950   0b101   0b1001
+ -0.4934   0b110   0b101
+ -0.4950   0b1001   0b101
+
+==== Root 5 ====
+ -0.4082   0b11   0b1100
+ +0.4082   0b101   0b1010
+ -0.4082   0b110   0b1001
+ -0.4082   0b1001   0b110
+ +0.4082   0b1010   0b101
+ -0.4082   0b1100   0b11
+
+==== Root 6 ====
+ -0.7054   0b11   0b1100
+ +0.7054   0b1100   0b11
+
+==== Root 7 ====
+ -0.5751   0b11   0b1100
+ -0.2858   0b101   0b1010
+ +0.2893   0b110   0b1001
+ +0.2893   0b1001   0b110
+ -0.2858   0b1010   0b101
+ -0.5751   0b1100   0b11
+
+==== Root 8 ====
+ +0.5115   0b11   0b101
+ -0.5115   0b101   0b11
+ +0.4878   0b101   0b1100
+ -0.4878   0b1100   0b101
+
+==== Root 9 ====
+ +0.4864   0b11   0b101
+ -0.4864   0b101   0b11
+ -0.5102   0b101   0b1100
+ +0.5102   0b1100   0b101
+
+==== Root 10 ====
+ +0.5001   0b11   0b101
+ +0.5001   0b101   0b11
+ -0.4978   0b101   0b1100
+ -0.4978   0b1100   0b101
+
+==== Root 11 ====
+ -0.4921   0b11   0b101
+ -0.4921   0b101   0b11
+ -0.4945   0b101   0b1100
+ -0.4945   0b1100   0b101

@@ -1,0 +1,11 @@
+Importing data...
+Setting up CASCI calculation...
+Starting CASCI calculation...
+
+** Self-consistently update the solvent effects for StateAveragePCMCASCI **
+
+** Solvent self-consistent cycle 0:
+
+WARN: PCM is an experimental feature. It is still in testing.
+Features and APIs may be changed in the future.
+
